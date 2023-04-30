@@ -1,22 +1,8 @@
 # QSYM: A Practical Concolic Execution Engine Tailored for Hybrid Fuzzing
 
 ## Environment
-- Tested on Ubuntu 14.04 64bit and 16.04 64bit
+- Tested on Ubuntu 20.04.01
 
-## Installation
-
-~~~~{.sh}
-# disable ptrace_scope for PIN
-$ echo 0|sudo tee /proc/sys/kernel/yama/ptrace_scope
-
-# install z3 and system deps
-$ ./setup.sh
-
-# install using virtual env
-$ virtualenv venv
-$ source venv/bin/activate
-$ pip install .
-~~~~
 
 ## Installation using Docker
 
@@ -30,12 +16,6 @@ $ docker build -t qsym ./
 # run docker image
 $ docker run --cap-add=SYS_PTRACE -it qsym /bin/bash
 ~~~~
-
-## Installation using vagrant
-
-Since QSYM is dependent on underlying kernel because of its old PIN, we decided
-to provide a convenient way to install QSYM with VM. Please take a look
-our [vagrant](vagrant) directory.
 
 
 ## Run hybrid fuzzing with AFL
