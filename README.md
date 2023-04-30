@@ -18,20 +18,30 @@ $ docker run --cap-add=SYS_PTRACE -it qsym /bin/bash
 ~~~~
 
 
-## Run hybrid fuzzing with AFL
+## Run hybrid fuzzing with weizz-fuzzer
 
 ~~~~{.sh}
 # require to set the following environment variables
+#   weizz_ROOT : weizz-fuzzer directory
 #   AFL_ROOT: afl directory (http://lcamtuf.coredump.cx/afl/)
 #   INPUT: input seed files
 #   OUTPUT: output directory
-#   AFL_CMDLINE: command line for a testing program for AFL (ASAN + instrumented)
-#   QSYM_CMDLINE: command line for a testing program for QSYM (Non-instrumented)
+#   AFL_CMDLINE: command line for a testing program for AFL
+#   QSYM_CMDLINE: command line for a testing program for QSYM
+
+# set up path
+$ export weizz_ROOT=/home/weizz
+$ export AFL_ROOT=/home/AFL
+$ export INPUT=/home/input
+$ export OUTPUT=/home/output
+$ export WEIZZ_CMDLINE=/path/to/binary
+$ export AFL_CMDLINE=/path/to/binary
+$ export QSYM_CMDLINE=/path/to/binary
 
 # run AFL master
-$ $AFL_ROOT/afl-fuzz -M afl-master -i $INPUT -o $OUTPUT -- $AFL_CMDLINE
+$ $AFL_ROOT/weizz-fuzz -Q -M afl-master -i $INPUT -o $OUTPUT -- $AFL_CMDLINE
 # run AFL slave
-$ $AFL_ROOT/afl-fuzz -S afl-slave -i $INPUT -o $OUTPUT -- $AFL_CMDLINE
+$ $AFL_ROOT/afl-fuzz -Q -S afl-slave -i $INPUT -o $OUTPUT -- $AFL_CMDLINE
 # run QSYM
 $ bin/run_qsym_afl.py -a afl-slave -o $OUTPUT -n qsym -- $QSYM_CMDLINE
 ~~~~
