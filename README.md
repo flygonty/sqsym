@@ -11,10 +11,13 @@
 $ echo 0|sudo tee /proc/sys/kernel/yama/ptrace_scope
 
 # build docker image
-$ docker build -t sqsym ./
+$ sudo docker build -t sqsym ./
 
 # run docker image
 $ sudo docker run --cap-add=SYS_PTRACE --privileged -it sqsym /bin/bash
+
+# install structural aware fuzzing component
+$ ./home/enable_sqsym.sh
 ~~~~
 
 
@@ -36,6 +39,9 @@ $ export INPUT=/home/input
 $ export OUTPUT=/home/output
 $ export WEIZZ_CMDLINE=/path/to/binary
 $ export QSYM_CMDLINE=/path/to/binary
+
+# echo to core_pattern
+$ echo core >/proc/sys/kernel/core_pattern
 
 # run AFL master
 $ $weizz_ROOT/weizz -Q -M weizz-master -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
