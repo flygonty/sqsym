@@ -33,7 +33,7 @@ $ ./home/enable_sqsym.sh
 #   QSYM_CMDLINE: command line for a testing program for QSYM
 
 # set up path
-$ export weizz_ROOT=/home/weizz-fuzzer/
+$ export weizz_ROOT=/home/weizz-fuzzer
 $ export AFL_ROOT=/home/AFL
 $ export INPUT=/home/input
 $ export OUTPUT=/home/output
@@ -41,6 +41,7 @@ $ export WEIZZ_CMDLINE=/path/to/binary
 $ export QSYM_CMDLINE=/path/to/binary
 
 # echo to core_pattern
+$ cd /home
 $ echo core >/proc/sys/kernel/core_pattern
 
 # run AFL master
