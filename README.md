@@ -11,10 +11,10 @@
 $ echo 0|sudo tee /proc/sys/kernel/yama/ptrace_scope
 
 # build docker image
-$ docker build -t qsym ./
+$ docker build -t sqsym ./
 
 # run docker image
-$ docker run --cap-add=SYS_PTRACE -it qsym /bin/bash
+$ sudo docker run --cap-add=SYS_PTRACE --privileged -it sqsym /bin/bash
 ~~~~
 
 
@@ -35,13 +35,12 @@ $ export AFL_ROOT=/home/AFL
 $ export INPUT=/home/input
 $ export OUTPUT=/home/output
 $ export WEIZZ_CMDLINE=/path/to/binary
-$ export AFL_CMDLINE=/path/to/binary
 $ export QSYM_CMDLINE=/path/to/binary
 
 # run AFL master
-$ $AFL_ROOT/weizz-fuzz -Q -M afl-master -i $INPUT -o $OUTPUT -- $AFL_CMDLINE
+$ $weizz_ROOT/weizz -Q -M weizz-master -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
 # run AFL slave
-$ $AFL_ROOT/afl-fuzz -Q -S afl-slave -i $INPUT -o $OUTPUT -- $AFL_CMDLINE
+$ $AFL_ROOT/afl-fuzz -Q -S weizz-slave -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
 # run QSYM
 $ bin/run_qsym_afl.py -a afl-slave -o $OUTPUT -n qsym -- $QSYM_CMDLINE
 ~~~~
