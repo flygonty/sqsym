@@ -47,8 +47,8 @@ $ echo core >/proc/sys/kernel/core_pattern
 $ $weizz_ROOT/weizz -Q -M weizz-master -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
 # run AFL slave
 $ $AFL_ROOT/afl-fuzz -Q -S weizz-slave -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
-# run QSYM
-$ bin/run_qsym_afl.py -a afl-slave -o $OUTPUT -n qsym -- $QSYM_CMDLINE
+# run QSYM under (/workdir/qsym)
+$ bin/run_qsym_afl.py -a weizz-slave -o $OUTPUT -n qsym -- $QSYM_CMDLINE
 ~~~~
 
 ## Run for testing
