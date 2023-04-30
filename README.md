@@ -33,6 +33,7 @@ $ ./home/enable_sqsym.sh
 #   QSYM_CMDLINE: command line for a testing program for QSYM
 
 # set up path
+$ export AFL_PATH=/home/AFL
 $ export weizz_ROOT=/home/weizz-fuzzer
 $ export AFL_ROOT=/home/AFL
 $ export INPUT=/home/input
