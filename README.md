@@ -73,7 +73,15 @@ $ tmux
 $ bin/run_qsym_afl.py -a weizz-slave -o $OUTPUT -n qsym -- $QSYM_CMDLINE
 
 # Now you can just wait for the crash :)
+~~~~
 
+## Copy target binary to Docker Container
+~~~~{.sh}
+# check your container id
+$ sudo docker container ls
+
+# copy your target id to docker container
+$ sudo docker cp /path/to/your/binary container_id:/home/
 ~~~~
 
 ## Troubleshooting
