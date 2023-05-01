@@ -18,7 +18,7 @@ $ sudo docker run --cap-add=SYS_PTRACE --privileged -it sqsym /bin/bash
 
 # install structural aware fuzzing component
 $ chmod +x enable_sqsym.sh
-$ ./home/enable_sqsym.sh
+$ ./enable_sqsym.sh
 ~~~~
 
 
