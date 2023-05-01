@@ -17,6 +17,7 @@ $ sudo docker build -t sqsym ./
 $ sudo docker run --cap-add=SYS_PTRACE --privileged -it sqsym /bin/bash
 
 # install structural aware fuzzing component
+$ chmod +x enable_sqsym.sh
 $ ./home/enable_sqsym.sh
 ~~~~
 
@@ -38,10 +39,12 @@ $ export weizz_ROOT=/home/weizz-fuzzer
 $ export AFL_ROOT=/home/AFL
 $ export INPUT=/home/input
 $ export OUTPUT=/home/output
-$ export WEIZZ_CMDLINE=/path/to/binary
-$ export QSYM_CMDLINE=/path/to/binary
 
-# echo to core_pattern
+# set up the path to your target binary
+$ export WEIZZ_CMDLINE=/path/to/binary
+$ export QSYM_CMDLINE=/path/to/binary 
+
+# make qemu mode work
 $ cd /home
 $ echo core >/proc/sys/kernel/core_pattern
 
@@ -53,16 +56,11 @@ $ $AFL_ROOT/afl-fuzz -Q -S weizz-slave -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
 $ bin/run_qsym_afl.py -a weizz-slave -o $OUTPUT -n qsym -- $QSYM_CMDLINE
 ~~~~
 
-## Run for testing
-
-~~~~{.sh}
-$ cd tests
-$ python build.py
-$ python -m pytest -n $(nproc)
-~~~~
 
 ## Troubleshooting
 If you find that you can't get QSYM to work and you get the `undefined symbol: Z3_is_seq_sort` error in pin.log file, please make sure that you compile and make the target when you're in the virtualenv (env) environment. When you're out of this environment and you compile the target, QSYM can't work with the target binary and issues the mentioned error in pin.log file. This will save your time a lot to compile and make the target from env and then run QSYM on the target, then QSYM will work like a charm!
+
+If you find you can't launch QEMU mode, it migth be lost the AFL_PATH for this situation. You can just simply type this cmd 'export=AFL_PATH=/home/AFL' to solve this error.
 
 
 ## Authors
