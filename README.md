@@ -22,7 +22,7 @@ $ ./home/enable_sqsym.sh
 ~~~~
 
 
-## Run hybrid fuzzing with weizz-fuzzer
+## Run hybrid fuzzing with weizz-fuzzer and QSYM
 
 ~~~~{.sh}
 # require to set the following environment variables
