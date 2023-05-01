@@ -56,6 +56,25 @@ $ $AFL_ROOT/afl-fuzz -Q -S weizz-slave -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
 $ bin/run_qsym_afl.py -a weizz-slave -o $OUTPUT -n qsym -- $QSYM_CMDLINE
 ~~~~
 
+## Recommend to run the hybrid fuzzing
+~~~~{.sh}
+# launch tmux
+$ tmux
+$ $weizz_ROOT/weizz -Q -M weizz-master -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
+$ Ctrl+b d # detach the current session
+
+# launch tmux
+$ tmux
+$ $AFL_ROOT/afl-fuzz -Q -S weizz-slave -i $INPUT -o $OUTPUT -- $WEIZZ_CMDLINE
+$ Ctrl+b d # detach the current session
+
+# launch tmux
+$ tmux
+$ bin/run_qsym_afl.py -a weizz-slave -o $OUTPUT -n qsym -- $QSYM_CMDLINE
+
+# Now you can just wait for the crash :)
+
+~~~~
 
 ## Troubleshooting
 If you find that you can't get QSYM to work and you get the `undefined symbol: Z3_is_seq_sort` error in pin.log file, please make sure that you compile and make the target when you're in the virtualenv (env) environment. When you're out of this environment and you compile the target, QSYM can't work with the target binary and issues the mentioned error in pin.log file. This will save your time a lot to compile and make the target from env and then run QSYM on the target, then QSYM will work like a charm!
