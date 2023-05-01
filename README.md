@@ -1,4 +1,4 @@
-# SQSYM: A Practical Concolic Execution Engine Tailored for structure aware Hybrid Fuzzing
+# Structural Aware Hybrid Fuzzing with QSYM
 
 ## Environment
 - Tested on Ubuntu 20.04.01
