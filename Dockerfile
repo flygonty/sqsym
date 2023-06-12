@@ -10,3 +10,6 @@ COPY . /workdir/qsym
 
 RUN ./setup.sh
 RUN pip install .
+
+RUN chmod +x enable_sqsym.sh
+RUN ./enable_sqsym.sh
